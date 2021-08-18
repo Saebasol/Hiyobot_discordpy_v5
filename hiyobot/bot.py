@@ -22,6 +22,9 @@ class Hiyobot(Bot):
         await self.request.close()
         return await super().close()
 
+    async def on_error(self, event_method, *args, **kwargs):
+        raise
+
 
 def load_cogs(bot: Hiyobot):
     extensions = list(
