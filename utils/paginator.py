@@ -32,21 +32,21 @@ class Paginator(View):
 
         return False
 
-    @button(label="다음", style=ButtonStyle.primary, emoji="▶️")
-    async def next_page(self, _, interaction: Interaction):
-        self.index += 1
-
-        if self.index >= self.total:
-            self.index = 0
-
-        await interaction.response.edit_message(embed=self.embeds[self.index])
-
-    @button(label="이전", style=ButtonStyle.primary, emoji="◀")
+    @button(label="이전", style=ButtonStyle.green, emoji="◀")
     async def prev_page(self, _, interaction: Interaction):
         self.index -= 1
 
         if self.index < 0:
             self.index = self.total - 1
+
+        await interaction.response.edit_message(embed=self.embeds[self.index])
+
+    @button(label="다음", style=ButtonStyle.green, emoji="▶️")
+    async def next_page(self, _, interaction: Interaction):
+        self.index += 1
+
+        if self.index >= self.total:
+            self.index = 0
 
         await interaction.response.edit_message(embed=self.embeds[self.index])
 
