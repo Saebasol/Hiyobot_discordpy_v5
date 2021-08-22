@@ -14,7 +14,7 @@ class MintChoco(Client):
 
     def get_image_url(self, url: str):
         url_parse_regex = re.compile(
-            r"\/\/(..?)(\.hitomi\.la|\.pximg\.net)\/(.+?)\/(.+)"
+            r"//(..?)(\.hitomi\.la|\.pximg\.net)/(.+?)/(.+)"
         )
         parsed_url: list[str] = url_parse_regex.findall(url)[0]
 

@@ -9,6 +9,7 @@ class Heliotrope(commands.Cog):
     def __init__(self, bot: Hiyobot):
         self.bot = bot
 
+    @commands.group("heliotrope")
     @commands.command("번호")
     @commands.is_nsfw()
     async def _info(self, ctx: commands.Context, index: int):
@@ -25,6 +26,7 @@ class Heliotrope(commands.Cog):
 
         await message.edit(embed=Embed(title="정보를 찾지 못했습니다."))
 
+    @commands.group("heliotrope")
     @commands.command("검색")
     @commands.is_nsfw()
     async def _search(self, ctx: commands.Context, *, query: str):
@@ -39,7 +41,8 @@ class Heliotrope(commands.Cog):
 
         await message.edit(embed=Embed(title="정보를 찾지 못했습니다."))
 
-    @commands.command(name="리스트")
+    @commands.group("heliotrope")
+    @commands.command("리스트")
     @commands.is_nsfw()
     async def _list(self, ctx: commands.Context, num: int = 1):
         """
@@ -55,7 +58,8 @@ class Heliotrope(commands.Cog):
 
         await message.edit(embed=Embed(title="정보를 찾지 못했습니다."))
 
-    @commands.command(name="뷰어")
+    @commands.group("heliotrope")
+    @commands.command("뷰어")
     @commands.is_nsfw()
     async def _viewer(self, ctx: commands.Context, index: int):
         """
