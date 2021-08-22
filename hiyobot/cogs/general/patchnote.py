@@ -11,7 +11,7 @@ class PatchNote(Cog):
     def __init__(self, bot: Hiyobot):
         self.bot = bot
 
-    @command(name="패치노트")
+    @command(name="패치노트", aliases=["patchnote"])
     async def _patchnote(self, ctx: Context, version: str = None):
         """
         패치노트가 올라옵니다.
