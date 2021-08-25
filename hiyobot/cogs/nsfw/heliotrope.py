@@ -9,8 +9,12 @@ class Heliotrope(commands.Cog):
     def __init__(self, bot: Hiyobot):
         self.bot = bot
 
-    @commands.group("heliotrope")
-    @commands.command("번호")
+    @commands.group("hitomi", aliases=["히토미"])
+    async def hitomi(self, ctx: commands.Context):
+        if ctx.invoked_subcommand:
+            return
+
+    @hitomi.command("정보")
     @commands.is_nsfw()
     async def _info(self, ctx: commands.Context, index: int):
         """
@@ -26,8 +30,7 @@ class Heliotrope(commands.Cog):
 
         await message.edit(embed=Embed(title="정보를 찾지 못했습니다."))
 
-    @commands.group("heliotrope")
-    @commands.command("검색")
+    @hitomi.command("검색")
     @commands.is_nsfw()
     async def _search(self, ctx: commands.Context, *, query: str):
         """
@@ -37,12 +40,13 @@ class Heliotrope(commands.Cog):
         message = await ctx.send(embed=Embed(title="정보를 요청합니다. 잠시만 기다려주세요."))
 
         if embeds := await self.bot.mintchoco.gallery_search(query.split(" ")):
-            return await message.edit(embed=embeds[0], view=Paginator(ctx.author.id, embeds))
+            return await message.edit(
+                embed=embeds[0], view=Paginator(ctx.author.id, embeds)
+            )
 
         await message.edit(embed=Embed(title="정보를 찾지 못했습니다."))
 
-    @commands.group("heliotrope")
-    @commands.command("리스트")
+    @hitomi.command("리스트")
     @commands.is_nsfw()
     async def _list(self, ctx: commands.Context, num: int = 1):
         """
@@ -54,12 +58,13 @@ class Heliotrope(commands.Cog):
         message = await ctx.send(embed=Embed(title="정보를 요청합니다. 잠시만 기다려주세요"))
 
         if embeds := await self.bot.mintchoco.gallery_list(num):
-            return await message.edit(embed=embeds[0], view=Paginator(ctx.author.id, embeds))
+            return await message.edit(
+                embed=embeds[0], view=Paginator(ctx.author.id, embeds)
+            )
 
         await message.edit(embed=Embed(title="정보를 찾지 못했습니다."))
 
-    @commands.group("heliotrope")
-    @commands.command("뷰어")
+    @hitomi.command("뷰어")
     @commands.is_nsfw()
     async def _viewer(self, ctx: commands.Context, index: int):
         """
@@ -71,7 +76,9 @@ class Heliotrope(commands.Cog):
         message = await ctx.send(embed=Embed(title="정보를 요청합니다. 잠시만 기다려주세요."))
 
         if embeds := await self.bot.mintchoco.gallery_viewer(index):
-            return await message.edit(embed=embeds[0], view=Paginator(ctx.author.id, embeds))
+            return await message.edit(
+                embed=embeds[0], view=Paginator(ctx.author.id, embeds)
+            )
 
         await message.edit(embed=Embed(title="정보를 찾지 못했습니다."))
 
